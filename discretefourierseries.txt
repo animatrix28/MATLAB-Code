@@ -1,0 +1,21 @@
+x=[0 pi/4 pi/2 3*pi/4 pi 5*pi/4 3*pi/2 7*pi/4];
+y=[0.5 2.4 3.7 5.3 1 2.5 4.7 1.2];
+syms t;
+T=2*pi;
+w=2*pi/T;
+h=3;
+a=zeros(1,h);
+b=zeros(1,h);
+a0=2*mean(y);
+HS=a0/2;
+for i=1:h
+    a(i)=2*mean(y.*cos(i*w*x));
+    b(i)=2*mean(y.*sin(i*w*x));
+    HS=HS+a(i)*cos(i*w*t)+b(i)*sin(i*w*t);
+end
+f=vpa(HS,3)
+plot(x,y,'*')
+hold on
+t=linspace(x(1),x(end),1000);
+y1=eval(HS);
+plot(t,y1,'r')
